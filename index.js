@@ -3,6 +3,7 @@ const express = require("express");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const productsRouter = require("./routes/products");
+const userRouter = require("./routes/users");
 
 const server = express();
 
@@ -11,6 +12,7 @@ server.use(morgan("common"));
 
 // Router setup
 server.use("/products", productsRouter.router);
+server.use("/users", userRouter.router);
 
 // Connect to cloud database
 async function connectToDb() {
