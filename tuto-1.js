@@ -46,23 +46,23 @@ server.get("/", (req, res) => {
 });
 
 // * NOTE: API - Endpoints - Routes
-server.get("/posts", auth, (req, res) => {
+server.get("/products", auth, (req, res) => {
   res.json({ type: "GET" });
 });
 
-server.post("/posts", auth, (req, res) => {
-  res.json({ type: "POST" });
+server.product("/products", auth, (req, res) => {
+  res.json({ type: "product" });
 });
 
-server.delete("/posts", (req, res) => {
+server.delete("/products", (req, res) => {
   res.json({ type: "DELETE" });
 });
 
-server.patch("/posts", (req, res) => {
+server.patch("/products", (req, res) => {
   res.json({ type: "PATCH" });
 });
 
-server.put("/posts", (req, res) => {
+server.put("/products", (req, res) => {
   res.json({ type: "PUT" });
 });
 

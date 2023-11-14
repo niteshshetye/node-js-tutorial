@@ -1,66 +1,66 @@
 const fs = require("fs");
 const express = require("express");
 
-const { posts } = JSON.parse(fs.readFileSync("data.json", "utf-8"));
+const { products } = JSON.parse(fs.readFileSync("data.json", "utf-8"));
 
 const server = express();
 
 server.use(express.json());
 
-// Create POST - /posts
-server.post("/post", (req, res) => {
-  let newProduct = { ...req.body, id: posts.length + 1 };
+// Create product - /products
+server.product("/product", (req, res) => {
+  let newProduct = { ...req.body, id: products.length + 1 };
 
-  posts.push(newProduct);
+  products.push(newProduct);
 
   res.json(newProduct);
 });
 
-// Read GET - /posts
-server.get("/posts", (req, res) => {
-  res.json(posts);
+// Read GET - /products
+server.get("/products", (req, res) => {
+  res.json(products);
 });
 
-// Read Single Item GET - /posts
-server.get("/post/:id", (req, res) => {
+// Read Single Item GET - /products
+server.get("/product/:id", (req, res) => {
   let { id } = req.params;
 
-  let myPost = posts.find((post) => +post.id === +id);
+  let myProducts = products.find((product) => +product.id === +id);
 
-  res.json(myPost);
+  res.json(myProducts);
 });
 
-// Update PUT - /post/:id (// * Note: PUT will override object)
-server.put("/post/:id", (req, res) => {
+// Update PUT - /product/:id (// * Note: PUT will override object)
+server.put("/product/:id", (req, res) => {
   let { id } = req.params;
 
-  let postIndex = posts.findIndex((post) => +post.id === +id);
+  let productIndex = products.findIndex((product) => +product.id === +id);
 
-  posts.splice(postIndex, 1, { ...req.body, id });
+  products.splice(productIndex, 1, { ...req.body, id });
 
-  res.status(200).json({ msg: "post updated" });
+  res.status(200).json({ msg: "product updated" });
 });
 
-// Update PATCH - /post/:id (// * Note: PATCH will only update the perticular field or key value)
-server.patch("/post/:id", (req, res) => {
+// Update PATCH - /product/:id (// * Note: PATCH will only update the perticular field or key value)
+server.patch("/product/:id", (req, res) => {
   let { id } = req.params;
 
-  let postIndex = posts.findIndex((post) => +post.id === +id);
-  let copyOldPost = posts[postIndex];
-  posts.splice(postIndex, 1, { ...copyOldPost, ...req.body });
+  let productIndex = products.findIndex((product) => +product.id === +id);
+  let copyOldproduct = products[productIndex];
+  products.splice(productIndex, 1, { ...copyOldproduct, ...req.body });
 
-  res.status(200).json({ msg: "post updated" });
+  res.status(200).json({ msg: "product updated" });
 });
 
-// Delete DELETE - /post/:id (// * Note: PUT will override object)
-server.delete("/post/:id", (req, res) => {
+// Delete DELETE - /product/:id (// * Note: PUT will override object)
+server.delete("/product/:id", (req, res) => {
   let { id } = req.params;
 
-  let postIndex = posts.findIndex((post) => +post.id === +id);
+  let productIndex = products.findIndex((product) => +product.id === +id);
 
-  posts.splice(postIndex, 1);
+  products.splice(productIndex, 1);
 
-  res.status(200).json({ msg: "post deleted" });
+  res.status(200).json({ msg: "product deleted" });
 });
 
 // listen server on port
